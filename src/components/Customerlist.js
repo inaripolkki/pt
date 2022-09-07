@@ -149,17 +149,16 @@ function Customerlist() {
   };
   return (
     <React.Fragment>
-      <CSVLink {...csvReport}>Export to CSV</CSVLink>
       <AddCustomer addCustomer={addCustomer} />
       <div
         className="ag-theme-material"
-        style={{ height: 600, width: "90%", margin: "auto" }}
+        style={{ height: 800, width: "80%", margin: "auto" }}
       >
         <AgGridReact
           rowData={customers}
           columnDefs={columns}
           pagination={true}
-          paginationPageSize={10}
+          paginationPageSize={20}
           suppressCellSelection={true}
         />
       </div>
@@ -169,6 +168,7 @@ function Customerlist() {
         onClose={() => setOpen(false)}
         message={msg}
       />
+      <CSVLink {...csvReport}>Export to CSV</CSVLink>
     </React.Fragment>
   );
 }

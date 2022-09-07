@@ -15,6 +15,13 @@ function Traininglist() {
     fetchTrainings();
   }, []);
 
+  const fetchTrainings = () => {
+    fetch("https://customerrest.herokuapp.com/gettrainings")
+      .then((response) => response.json())
+      .then((data) => setTrainings(data))
+      .catch((err) => console.error(err));
+  };
+
   const deleteTraining = (id) => {
     console.log(id);
     if (window.confirm("Are you sure?")) {
@@ -32,13 +39,6 @@ function Traininglist() {
         })
         .catch((err) => console.error(err));
     }
-  };
-
-  const fetchTrainings = () => {
-    fetch("https://customerrest.herokuapp.com/gettrainings")
-      .then((response) => response.json())
-      .then((data) => setTrainings(data))
-      .catch((err) => console.error(err));
   };
 
   const columns = [
@@ -74,13 +74,13 @@ function Traininglist() {
     <React.Fragment>
       <div
         className="ag-theme-material"
-        style={{ height: 600, width: "90%", margin: "auto" }}
+        style={{ height: 600, width: "80%", margin: "auto" }}
       >
         <AgGridReact
           rowData={trainings}
           columnDefs={columns}
           pagination={true}
-          paginationPageSize={10}
+          paginationPageSize={20}
           suppressCellSelection={true}
         />
       </div>

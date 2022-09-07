@@ -3,6 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import daygridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import moment from "moment";
+import { ResponsiveContainer } from "recharts";
 
 function Calendar() {
   const [trainings, setTrainings] = useState([]);
@@ -25,7 +26,7 @@ function Calendar() {
   if (trainings.length > 0) {
     trainings.forEach(function (event) {
       trainingTimes.push({
-        title: `${event.activity} // ${event.customer.firstname}  ${event.customer.lastname}`,
+        title: `${event.activity} / ${event.customer.firstname}  ${event.customer.lastname}`,
         allDay: false,
         start: new Date(
           moment(event.date).format("YYYY"),
@@ -49,13 +50,15 @@ function Calendar() {
   }
 
   return (
-    <FullCalendar
-      plugins={[daygridPlugin, interactionPlugin]}
-      initialView="dayGridMonth"
-      events={trainingTimes}
-      startAccessor="start"
-      endAccessor="end"
-    ></FullCalendar>
+    <ResponsiveContainer width="80%" aspect={1.5}>
+      <FullCalendar
+        plugins={[daygridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        events={trainingTimes}
+        startAccessor="start"
+        endAccessor="end"
+      ></FullCalendar>
+    </ResponsiveContainer>
   );
 }
 
